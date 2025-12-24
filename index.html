@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolMaster - Free Online Tools for Professionals</title>
+    <meta name="description" content="Free online tools for image processing, PDF manipulation, text editing, and more. All tools work directly in your browser - no installation needed.">
+    <meta name="keywords" content="online tools, image tools, PDF tools, free tools, web tools, utilities">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #eef2ff;
+            --secondary: #7209b7;
+            --accent: #06d6a0;
+            --accent-dark: #05b888;
+            --danger: #ef476f;
+            --warning: #ffd166;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --gray-light: #adb5bd;
+            --border: #e9ecef;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow: 0 8px 30px rgba(0,0,0,0.12);
+            --shadow-lg: 0 15px 50px rgba(0,0,0,0.15);
+            --radius-sm: 10px;
+            --radius: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.3);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+        
+        .logo-text span {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 8px 0;
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .search-btn, .user-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border: 1px solid var(--border);
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-btn:hover, .user-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--light);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 40px;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(67, 97, 238, 0.5);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--dark);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 80px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        /* Tools Categories */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .categories {
+            padding: 80px 0;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 32px;
+            text-align: center;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: translateY(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .category-card:hover::before {
+            transform: translateY(0);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .category-card:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .category-card.image .category-icon {
+            background: linear-gradient(135deg, #4361ee, #3a56d4);
+        }
+        
+        .category-card.pdf .category-icon {
+            background: linear-gradient(135deg, #ef476f, #d43a5a);
+        }
+        
+        .category-card.text .category-icon {
+            background: linear-gradient(135deg, #06d6a0, #05b888);
+        }
+        
+        .category-card.dev .category-icon {
+            background: linear-gradient(135deg, #ffd166, #ffb347);
+        }
+        
+        .category-card.security .category-icon {
+            background: linear-gradient(135deg, #7209b7, #5a0792);
+        }
+        
+        .category-card.other .category-icon {
+            background: linear-gradient(135deg, #6c757d, #545b62);
+        }
+        
+        .category-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        
+        .category-card p {
+            color: var(--gray);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .category-tools {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .tool-tag {
+            background: var(--light);
+            color: var(--dark);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .category-card:hover .tool-tag {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+        
+        /* Featured Tools */
+        .featured-tools {
+            padding: 80px 0;
+            background: white;
+            border-radius: var(--radius-lg);
+            margin-bottom: 80px;
+            box-shadow: var(--shadow);
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        },href /img -compress.html| clASS='TOOL-CARD'style='text-decoration;none;color;inherit;'.
+        
+        .tool-card {
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 32px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            background: white;
+        }
+        
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .tool-card:hover::before {
+            transform: translateX(0);
+        }
+        
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .tool-card:nth-child(1) .tool-icon {
+            background: linear-gradient(135deg, #4361ee, #3a56d4);
+        }
+        
+        .tool-card:nth-child(2) .tool-icon {
+            background: linear-gradient(135deg, #ef476f, #d43a5a);
+        }
+        
+        .tool-card:nth-child(3) .tool-icon {
+            background: linear-gradient(135deg, #06d6a0, #05b888);
+        }
+        
+        .tool-card:nth-child(4) .tool-icon {
+            background: linear-gradient(135deg, #ffd166, #ffb347);
+        }
+        
+        .tool-card:nth-child(5) .tool-icon {
+            background: linear-gradient(135deg, #7209b7, #5a0792);
+        }
+        
+        .tool-card:nth-child(6) .tool-icon {
+            background: linear-gradient(135deg, #6c757d, #545b62);
+        }
+        
+        .tool-info h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+        
+        .tool-info p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .tool-description {
+            color: var(--gray);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .tool-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .tool-usage {
+            font-size: 0.85rem;
+            color: var(--gray-light);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .tool-link {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .tool-link:hover {
+            color: var(--secondary);
+            gap: 10px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 40px 32px;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-lg);
+            margin: 80px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Z"></path></svg>');
+            background-size: cover;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cta .btn {
+            background: white;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+        }
+        
+        .cta .btn:hover {
+            background: var(--light);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 40px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 24px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .footer-section p {
+            color: #adb5bd;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2.4rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: var(--shadow);
+                border-top: 1px solid var(--border);
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav li {
+                width: 100%;
+            }
+            
+            nav a {
+                display: block;
+                padding: 16px;
+                border-bottom: 1px solid var(--border);
+            }
+            
+            nav a:last-child {
+                border-bottom: none;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-stats {
+                gap: 40px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .hero {
+                padding: 80px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .hero-stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .cta h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .category-card, .tool-card, .feature-card {
+                padding: 30px 24px;
+            }
+            
+            .cta {
+                padding: 70px 0;
+            }
+            
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Animation for page load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Search Modal */
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .search-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .search-content {
+            background: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 600px;
+            padding: 40px;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.5s ease;
+        }
+        
+        .search-modal.active .search-content {
+            transform: translateY(0);
+        }
+        
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .search-header h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .close-search {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .close-search:hover {
+            background: var(--light);
+            color: var(--danger);
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 18px 24px;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            margin-bottom: 30px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .search-result-item {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-result-item:hover {
+            background: var(--primary-light);
+        }
+        
+        .search-result-item h4 {
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+        
+        .search-result-item p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Tool<span>Master</span></h1>
+                    <p>All-in-one Online Toolbox</p>
+                </div>
+            </a>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#tools">Tools</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-actions">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="user-btn">
+                    <i class="fas fa-user"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-content">
+            <div class="search-header">
+                <h3>Search Tools</h3>
+                <button class="close-search" id="closeSearch">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <input type="text" class="search-input" placeholder="Type to search for tools...">
+            <div class="search-results">
+                <div class="search-result-item">
+                    <h4>Image Compressor</h4>
+                    <p>Reduce image file size without losing quality</p>
+                </div>
+                <div class="search-result-item">
+                    <h4>PDF Merger</h4>
+                    <p>Combine multiple PDF files into one document</p>
+                </div>
+                <div class="search-result-item">
+                    <h4>Text to Speech</h4>
+                    <p>Convert written text into natural sounding speech</p>
+                </div>
+                <div class="search-result-item">
+                    <h4>QR Code Generator</h4>
+                    <p>Create QR codes for URLs, text, and contact info</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1 class="fade-in">Powerful Online Tools For Every Task</h1>
+            <p class="fade-in delay-1">Access 100+ free tools for image processing, PDF manipulation, text editing, web development, and more. All tools work directly in your browser with no installation required.</p>
+            
+            <div class="hero-buttons fade-in delay-2">
+                <button class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> Explore All Tools
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-play-circle"></i> How It Works
+                </button>
+            </div>
+            
+            <div class="hero-stats fade-in delay-3">
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Free Tools</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Monthly Users</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">⚡</span>
+                    <span class="stat-label">Instant Results</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Tools By Category</h2>
+                <p>Browse our collection of tools organized by category</p>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card image fade-in">
+                    <div class="category-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Image Tools</h3>
+                    <p>Edit, compress, convert, and optimize images for web and social media.</p>
+                    <div class="category-tools">
+                        <span class="tool-tag">Compressor</span>
+                        <span class="tool-tag">Converter</span>
+                        <span class="tool-tag">Resizer</span>
+                        <span class="tool-tag">Editor</span>
+                    </div>
+                </div>
+                
+                <div class="category-card pdf fade-in delay-1">
+                    <div class="category-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>PDF Tools</h3>
+                    <p>Merge, split, compress, convert, and edit PDF documents with ease.</p>
+                    <div class="category-tools">
+                        <span class="tool-tag">Merger</span>
+                        <span class="tool-tag">Splitter</span>
+                        <span class="tool-tag">Converter</span>
+                        <span class="tool-tag">Editor</span>
+                    </div>
+                </div>
+                
+                <div class="category-card text fade-in delay-2">
+                    <div class="category-icon">
+                        <i class="fas fa-font"></i>
+                    </div>
+                    <h3>Text Tools</h3>
+                    <p>Format, convert, analyze, and manipulate text for various purposes.</p>
+                    <div class="category-tools">
+                        <span class="tool-tag">Formatter</span>
+                        <span class="tool-tag">Counter</span>
+                        <span class="tool-tag">Converter</span>
+                        <span class="tool-tag">Generator</span>
+                    </div>
+                </div>
+                
+                <div class="category-card dev fade-in">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Developer Tools</h3>
+                    <p>Tools for web developers, programmers, and IT professionals.</p>
+                    <div class="category-tools">
+                        <span class="tool-tag">JSON Formatter</span>
+                        <span class="tool-tag">Base64 Encoder</span>
+                        <span class="tool-tag">HTML Formatter</span>
+                        <span class="tool-tag">Color Picker</span>
+                    </div>
+                </div>
+                
+                <div class="category-card security fade-in delay-1">
+                    <div class="category-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security Tools</h3>
+                    <p>Encrypt, decrypt, hash, and generate secure passwords and keys.</p>
+                    <div class="category-tools">
+                        <span class="tool-tag">Password Generator</span>
+                        <span class="tool-tag">Encryptor</span>
+                        <span class="tool-tag">Hash Generator</span>
+                        <span class="tool-tag">QR Code</span>
+                    </div>
+                </div>
+                
+                <div class="category-card other fade-in delay-2">
+                    <div class="category-icon">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <h3>Other Tools</h3>
+                    <p>Miscellaneous tools for everyday tasks and productivity.</p>
+                    <div class="category-tools">
+                        <span class="tool-tag">Calculator</span>
+                        <span class="tool-tag">Unit Converter</span>
+                        <span class="tool-tag">Timer</span>
+                        <span class="tool-tag">Planner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Tools -->
+    <section class="featured-tools" id="tools">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Most Popular Tools</h2>
+                <p>Check out our most frequently used tools by our community</p>
+            </div>
+            
+            <div class="tools-grid">
+                <div class="tool-card fade-in">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-compress-alt"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Image Compressor</h3>
+                            <p>Image Tools</p>
+                        </div>
+                    </div>
+                    <p class="tool-description">Reduce image file size without losing quality. Supports JPG, PNG, WebP formats.</p>
+                    <div class="tool-meta">
+                        <div class="tool-usage">
+                            <i class="fas fa-users"></i> 15K uses/week
+                        </div>
+                        <a href="#" class="tool-link">
+                            Use Tool <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="tool-card fade-in delay-1">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>PDF Merger</h3>
+                            <p>PDF Tools</p>
+                        </div>
+                    </div>
+                    <p class="tool-description">Combine multiple PDF files into one document. Drag and drop interface.</p>
+                    <div class="tool-meta">
+                        <div class="tool-usage">
+                            <i class="fas fa-users"></i> 12K uses/week
+                        </div>
+                        <a href="#" class="tool-link">
+                            Use Tool <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="tool-card fade-in delay-2">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>QR Code Generator</h3>
+                            <p>Security Tools</p>
+                        </div>
+                    </div>
+                    <p class="tool-description">Create custom QR codes for URLs, contact info, WiFi, and more.</p>
+                    <div class="tool-meta">
+                        <div class="tool-usage">
+                            <i class="fas fa-users"></i> 10K uses/week
+                        </div>
+                        <a href="#" class="tool-link">
+                            Use Tool <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="tool-card fade-in">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-text-height"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Text to Speech</h3>
+                            <p>Text Tools</p>
+                        </div>
+                    </div>
+                    <p class="tool-description">Convert written text into natural sounding speech with multiple voices.</p>
+                    <div class="tool-meta">
+                        <div class="tool-usage">
+                            <i class="fas fa-users"></i> 8K uses/week
+                        </div>
+                        <a href="#" class="tool-link">
+                            Use Tool <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="tool-card fade-in delay-1">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Color Picker</h3>
+                            <p>Developer Tools</p>
+                        </div>
+                    </div>
+                    <p class="tool-description">Pick colors from images or create color palettes for your projects.</p>
+                    <div class="tool-meta">
+                        <div class="tool-usage">
+                            <i class="fas fa-users"></i> 7K uses/week
+                        </div>
+                        <a href="#" class="tool-link">
+                            Use Tool <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="tool-card fade-in delay-2">
+                    <div class="tool-header">
+                        <div class="tool-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="tool-info">
+                            <h3>Password Generator</h3>
+                            <p>Security Tools</p>
+                        </div>
+                    </div>
+                    <p class="tool-description">Create strong, secure passwords with customizable length and characters.</p>
+                    <div class="tool-meta">
+                        <div class="tool-usage">
+                            <i class="fas fa-users"></i> 6K uses/week
+                        </div>
+                        <a href="#" class="tool-link">
+                            Use Tool <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Why Choose ToolMaster</h2>
+                <p>Discover what makes our toolbox stand out from the rest</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Fast & Efficient</h3>
+                    <p>All tools work instantly in your browser without any delays. No server processing means faster results.</p>
+                </div>
+                
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Privacy First</h3>
+                    <p>Your data never leaves your device. All processing happens locally in your browser for maximum security.</p>
+                </div>
+                
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Fully Responsive</h3>
+                    <p>Access all tools from any device - desktop, tablet, or mobile. The interface adapts to your screen size.</p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>No Limits</h3>
+                    <p>Use our tools as much as you want, completely free. No registration, no watermarks, no hidden fees.</p>
+                </div>
+                
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Regular Updates</h3>
+                    <p>We constantly add new tools and improve existing ones based on user feedback and needs.</p>
+                </div>
+                
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Community Support</h3>
+                    <p>Join our growing community of users who help each other and suggest new tools to add.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container cta-content">
+            <h2 class="fade-in">Ready to Boost Your Productivity?</h2>
+            <p class="fade-in delay-1">Join thousands of users who rely on ToolMaster for their daily tasks. Start using our tools today - no registration required!</p>
+            <button class="btn fade-in delay-2">
+                <i class="fas fa-rocket"></i> Get Started Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ToolMaster</h3>
+                    <p>Your all-in-one online toolbox with 100+ free tools for image processing, PDF manipulation, text editing, and more.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#categories"><i class="fas fa-chevron-right"></i> Categories</a></li>
+                        <li><a href="#tools"><i class="fas fa-chevron-right"></i> Popular Tools</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-image"></i> Image Tools</a></li>
+                        <li><a href="#"><i class="fas fa-file-pdf"></i> PDF Tools</a></li>
+                        <li><a href="#"><i class="fas fa-font"></i> Text Tools</a></li>
+                        <li><a href="#"><i class="fas fa-code"></i> Developer Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                        <li><a href="#"><i class="fab fa-discord"></i> Discord</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="currentYear"></span> ToolMaster. All rights reserved. | All tools work locally in your browser for maximum privacy.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchModal = document.getElementById('searchModal');
+        const closeSearch = document.getElementById('closeSearch');
+        const currentYear = document.getElementById('currentYear');
+        
+        // Set current year
+        currentYear.textContent = new Date().getFullYear();
+        
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+        
+        // Search modal functionality
+        searchBtn.addEventListener('click', () => {
+            searchModal.classList.add('active');
+        });
+        
+        closeSearch.addEventListener('click', () => {
+            searchModal.classList.remove('active');
+        });
+        
+        // Close search modal when clicking outside
+        searchModal.addEventListener('click', (e) => {
+            if (e.target === searchModal) {
+                searchModal.classList.remove('active');
+            }
+        });
+        
+        // Close search modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+                searchModal.classList.remove('active');
+            }
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const searchResults = document.querySelectorAll('.search-result-item');
+        
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            searchResults.forEach(result => {
+                const title = result.querySelector('h4').textContent.toLowerCase();
+                const desc = result.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                    result.style.display = 'block';
+                } else {
+                    result.style.display = 'none';
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.section-header, .category-card, .tool-card, .feature-card, .cta h2, .cta p, .cta .btn').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Tool card click functionality
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const toolName = card.querySelector('h3').textContent;
+                showNotification(`Opening ${toolName}...`, 'info');
+            });
+        });
+        
+        // Category card click functionality
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const categoryName = card.querySelector('h3').textContent;
+                showNotification(`Loading ${categoryName} tools...`, 'info');
+            });
+        });
+        
+        // Button functionality
+        document.querySelectorAll('.btn-primary, .btn-secondary, .cta .btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                showNotification('Redirecting to tools page...', 'info');
+            });
+        });
+        
+        // Show notification
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            
+            // Set icon based on type
+            let icon = 'info-circle';
+            let bgColor = '#4361ee';
+            
+            if (type === 'success') {
+                icon = 'check-circle';
+                bgColor = '#06d6a0';
+            }
+            if (type === 'error') {
+                icon = 'exclamation-circle';
+                bgColor = '#ef476f';
+            }
+            if (type === 'warning') {
+                icon = 'exclamation-triangle';
+                bgColor = '#ffd166';
+            }
+            
+            notification.innerHTML = `
+                <div style="position: fixed; bottom: 30px; right: 30px; z-index: 9999; background: ${bgColor}; color: white; padding: 16px 24px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 12px; max-width: 400px; animation: slideInRight 0.3s ease;">
+                    <i class="fas fa-${icon}" style="font-size: 1.2rem;"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Add CSS for animation
+            if (!document.querySelector('#notification-animation')) {
+                const style = document.createElement('style');
+                style.id = 'notification-animation';
+                style.textContent = `
+                    @keyframes slideInRight {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOutRight {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.querySelector('div').style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        // Initialize animations on page load
+        window.addEventListener('load', () => {
+            // Add fade-in class to elements that are already in view
+            document.querySelectorAll('.section-header, .category-card, .tool-card, .feature-card, .cta h2, .cta p, .cta .btn').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.classList.add('fade-in');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
